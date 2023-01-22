@@ -40,13 +40,16 @@ export async function createUser(
   throw new Error();
 }
 
-// export async function increaseTokenVersion(userId: string) {
-//   const coll = await collection()
-//   const result = await coll.findOneAndUpdate({id: userId}, {$inc: {tokenVersion: 1}})
-//   if (result.ok) return result.value
+export async function increaseTokenVersion(userId: string) {
+  const coll = await collection();
+  const result = await coll.findOneAndUpdate(
+    { id: userId },
+    { $inc: { tokenVersion: 1 } }
+  );
+  if (result.ok) return result.value;
 
-//   throw new Error()
-// }
+  throw new Error();
+}
 
 export async function getUserById(id: string) {
   const coll = await collection();
