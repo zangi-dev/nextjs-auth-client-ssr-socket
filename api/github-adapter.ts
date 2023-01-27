@@ -6,7 +6,7 @@ interface GitHubUser {
 }
 
 interface AccessTokenResponse {
-  access_token: string;
+  access_token: string; //
 }
 
 interface UserResponse {
