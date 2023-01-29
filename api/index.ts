@@ -46,18 +46,27 @@ app.get("/github", async (req, res) => {
 
 app.post("/refresh", async (req, res) => {
   try {
+    console.log("refresh before verify");
+
     const current = verifyRefreshToken(req.cookies[Cookies.RefreshToken]);
+    console.log("current", current);
+
     const user = await getUserById(current!.userId);
-    console.log("user", user);
+    console.log("before refresh");
 
     const { accessToken, refreshToken } = await refreshTokens(
       current!,
       user?.tokenVersion!
     );
+    console.log("after refresh", accessToken, refreshToken);
+
     setTokens(res, accessToken, refreshToken!);
   } catch (error) {
+    console.log("refresh error", error);
+
     clearTokens(res);
   }
+  res.end();
 });
 
 app.post("/logout", authMiddleware, (req, res) => {

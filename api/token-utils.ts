@@ -99,7 +99,7 @@ export function refreshTokens(current: RefreshToken, tokenVersion: number) {
   if (secondsUntilExpiration < TokenExpiration.RefreshIfLessThan) {
     refreshPayload = { userId: current.userId, version: tokenVersion };
   }
-
+  console.log("refreshTokens", refreshPayload);
   const refreshToken = refreshPayload && signRefreshToken(refreshPayload);
 
   return { accessToken, refreshToken };
